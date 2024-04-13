@@ -34,11 +34,14 @@ function appendData(data) {
   let definition = document.getElementById("definition")!;
   let definitiontwo = document.getElementById("definitiontwo")!;
   let definitionthree = document.getElementById("definitionthree")!;
+  let synonymsone = document.getElementById("synonymsone")!;
 
   word.innerHTML = data[0].word;
   definition.innerHTML = data[0].meanings[0].partOfSpeech + ": " + data[0].meanings[0].definitions[0].definition;
   definitiontwo.innerHTML = data[0].meanings[1].partOfSpeech + ": " + data[0].meanings[1].definitions[0].definition;
   definitionthree.innerHTML = data[0].meanings[2].partOfSpeech + ": " + data[0].meanings[2].definitions[0].definition;
+  synonymsone.innerHTML = data[0].meanings[0].synonyms[0];
+
   console.log(data[0])
   // mainContainer.appendChild(w);
   // mainContainer.appendChild(p);
