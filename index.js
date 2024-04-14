@@ -25,9 +25,10 @@ function appendData(data) {
     var word = document.getElementById("word");
     var phonetics = document.getElementById("phonetics");
     var definition = document.getElementById("definition");
-    // let definitiontwo = document.getElementById("definitiontwo")!;
-    // let definitionthree = document.getElementById("definitionthree")!;
-    // let synonymsone = document.getElementById("synonymsone")!;
+    var synonyms = document.getElementById("synonyms");
+    var antonyms = document.getElementById("antonyms");
+    var audio = document.getElementById("audio");
+    var audioSource = document.getElementById("audioSource");
     word.innerHTML = data[0].word;
     var phoneticFound = false;
     for (var i = 0; i < data[0].phonetics.length; i++) {
@@ -50,6 +51,34 @@ function appendData(data) {
     }
     if (!definitionFound) {
         definition.innerHTML = "N/A";
+    }
+    synonyms.innerHTML = "";
+    for (var i = 0; i < data[0].meanings.length; i++) {
+        if (data[0].meanings[i].synonyms[0]) {
+            var synonymsThing = document.createElement("li");
+            synonymsThing.textContent = data[0].meanings[i].synonyms;
+            synonyms.appendChild(synonymsThing);
+        }
+    }
+    antonyms.innerHTML = "";
+    for (var i = 0; i < data[0].meanings.length; i++) {
+        if (data[0].meanings[i].antonyms[0]) {
+            var antonymsThing = document.createElement("li");
+            antonymsThing.textContent = data[0].meanings[i].antonyms;
+            antonyms.appendChild(antonymsThing);
+        }
+    }
+    var audioFound = false;
+    for (var i = 0; i < data[0].phonetics.length; i++) {
+        if (data[0].phonetics[i].audio) {
+            audioSource.src = data[0].phonetics[i].audio;
+            audio.load();
+            audioFound = true;
+            break;
+        }
+    }
+    if (!audioFound) {
+        audio.innerHTML = "N/A";
     }
     // phonetics.innerHTML = data[0].phonetics[1].text;
     // definition.innerHTML = data[0].meanings[0].partOfSpeech + ": " + data[0].meanings[0].definitions[0].definition;
